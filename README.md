@@ -9,7 +9,9 @@ for connection diagram check the attached image(images.jpg)
     SCL connects to Pin 5
     GND connects to Pin 6
 ![image](https://github.com/user-attachments/assets/fbc43b05-8bba-4e58-ac7e-6d04b3c5f97c)
-if its  modile like the picture itshouldjust slide into it by gentle push (refer images.jpg)
+
+if its  modele like the picture itshouldjust slide into it by gentle push (refer images.jpg)
+
 ![image](https://github.com/user-attachments/assets/27864b2c-04f4-4e86-8c23-583605903519)
 
 #STEP-2,Enabling the I2C on the raspberry pi 

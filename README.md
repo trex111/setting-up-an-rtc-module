@@ -26,8 +26,6 @@ The above command opens the config.tx file
 
     sudo reboot
 
-![image](https://github.com/user-attachments/assets/8eb8b9cc-7f5c-4e4d-98c4-5ce279a97a83)
-
 #step-3,Configuring the Raspberry pi
 1.Let’s begin this tutorial by ensuring our Raspberry Pi is entirely up to date; this ensures that we will be utilizing all the latest software available.
 open terminal and execute the following commands:-
@@ -65,3 +63,65 @@ Run the following command on your Raspberry Pi to install python-smbus and i2c-t
 
     sudo i2cdetect -y 1
 
+![image](https://github.com/user-attachments/assets/8eb8b9cc-7f5c-4e4d-98c4-5ce279a97a83)
+
+You should get an output like the above image.
+
+The 0x68 is a popular address for real-time clocks, especially for the DS3231. Having a 68(instead of the UU) on the address means that a driver wasn’t using the address. If the address result is “UU”, it is currently being used by a driver.
+#STEP-4,Use the DS3231 as the main clock
+1.To use the DS3231 as the main clock we nee to edit the 'hwclock-set' file 
+Run the following command in the  terminal and comment out the lines given below
+
+        sudo nano /lib/udev/hwclock-set
+
+2.comment out the lines given below:
+
+        if [ -e /run/systemd/system ] ; then
+        exit 0
+        fi
+
+3.After change(commenting out(#)) it should look like this
+
+        #if [ -e /run/systemd/system ] ; then
+        # exit 0
+        #fi
+
+4.Now save the file by pressing ctrl+x and then y to save changes and exit
+
+5.Now reboot your pi 
+
+    sudo reboot
+
+6. Once your Raspberry Pi has finished restarting we can now run the following command, this is so we can make sure that the kernel drivers for the RTC Chip are loaded in.
+
+        sudo i2cdetect -y 1
+
+7.You should see a wall of text appear, if “UU” appears instead of “68” then we have successfully loaded in the Kernel driver for our RTC circuit.
+
+8.Now that we have successfully got the kernel driver activated for the RTC Chip and we know it’s communicating with the Raspberry Pi, we need to remove the “fake-hwclock“ package. This package acts as a placeholder for the real hardware clock when you don’t have one.
+
+Type the following two commands into the terminal on your Raspberry Pi to remove the fake-hwclock package. We also remove hwclock from any startup scripts as we will no longer need this.
+
+        sudo apt -y remove fake-hwclock
+        sudo update-rc.d -f fake-hwclock remove
+
+#step-5,Syncing time from the Pi to the RTC module
+Now that we have our RTC module all hooked up and Raspbian and the Raspberry Pi configured correctly we need to synchronize the time with our RTC Module. The reason for this is that the time provided by a new RTC module will be incorrect.
+
+1.You can read the time directly from the RTC module by running the following command if you try it now you will notice it is currently way off our current real-time.
+
+        sudo hwclock -D -r
+
+2.Now before we go ahead and sync the correct time from our Raspberry Pi to our RTC module, we need to run the following command to make sure the time on the Raspberry Pi is in fact correct.If the time is not right, make sure that you are connected to a Wi-Fi or Ethernet connection.
+
+        date
+        
+3. If the time displayed by the date command is correct, we can go ahead and run the following command on your Raspberry Pi.This command will write the time from the Raspberry Pi to the RTC Module.
+
+        sudo hwclock -w
+
+4.Now if you read the time directly from the RTC module again, you will notice that it has been changed to the same time as what your Raspberry Pi was set at.
+
+        sudo hwclock -r
+
+#You should hopefully now have a fully operational RTC module that is actively keeping your Raspberry Pi’s time correct even when it loses power or loses an internet connection. I hope you have enjoyed this fun Pi project and will put it to good use.

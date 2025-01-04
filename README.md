@@ -10,7 +10,7 @@ for connection diagram check the attached image(images.jpg)
     GND connects to Pin 6
 ![image](https://github.com/user-attachments/assets/fbc43b05-8bba-4e58-ac7e-6d04b3c5f97c)
 
-if its  modele like the picture itshouldjust slide into it by gentle push (refer images.jpg)
+if its  modele like the picture itshouldjust slide into it by gentle push (refer images.jpg)like shown below.
 
 ![image](https://github.com/user-attachments/assets/27864b2c-04f4-4e86-8c23-583605903519)
 

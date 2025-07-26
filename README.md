@@ -23,7 +23,7 @@ to edit the file
 The above command opens the config.tx file
 2.Add the below two lines.
 
-    dtparam=i2c_arm=on (this line might becommented out like #dtparam=i2c_arm=on)
+    dtparam=i2c_arm=on (this line might be commented out like #dtparam=i2c_arm=on)
     dtoverlay=i2c-rtc,ds3231
 
 3.Now save the config.txt file by pressing ctrl+x and then y to save changes and exit
@@ -43,8 +43,8 @@ Run the following command to launch the configuration tool.
 
     sudo raspi-config
 
-3.This command will bring up the configuration tool; this tool is an easy way to make a variety of changes to your Raspberry Pi’s configuration. Today, however, we will only by exploring how to enable the I2C interface.
-Use the ARROW KEYS to go down and select “3 Interface Options“. Once this option has been selected, you can press ENTER.
+3.This command will bring up the configuration tool; this tool is an easy way to make a variety of changes to your Raspberry Pi’s configuration , however, we will only by exploring how to enable the I2C interface.
+Use the ARROW KEYS to go down and select “Interface Options“. Once this option has been selected, you can press ENTER.
 
 4.On the next screen, you will want to use the ARROW KEYS to select “I2C“, press ENTER once highlighted to choose this option.
 
@@ -129,4 +129,4 @@ Now that we have our RTC module all hooked up and Raspbian and the Raspberry Pi 
 
         sudo hwclock -r
 
-#You should hopefully now have a fully operational RTC module that is actively keeping your Raspberry Pi’s time correct even when it loses power or loses an internet connection. I hope you have enjoyed this fun Pi project and will put it to good use.
+#You should hopefully now have a fully operational RTC module that is actively keeping your Raspberry Pi’s time correct. I hope you have enjoyed this fun Pi project.
